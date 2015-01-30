@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import static hudson.Util.fixNull;
 import static java.util.Arrays.asList;
+import java.util.Collections;
 
 public class JiraVersionParameterDefinition extends ParameterDefinition {
     private static final long serialVersionUID = 3927562542249244416L;
@@ -71,6 +72,7 @@ public class JiraVersionParameterDefinition extends ParameterDefinition {
         for (RemoteVersion version : fixNull(asList(versions))) {
             if (match(version)) projectVersions.add(new Result(version));
         }
+        Collections.sort(projectVersions);
 
         return projectVersions;
     }
@@ -137,13 +139,17 @@ public class JiraVersionParameterDefinition extends ParameterDefinition {
         }
     }
 
-    public static class Result {
+    public static class Result implements Comparable<Result>{
         public final String name;
         public final String id;
 
         public Result(final RemoteVersion version) {
             this.name = version.getName();
             this.id = version.getId();
+        }
+
+        public int compareTo(Result o) {
+            return this.name.compareToIgnoreCase(o.name) * -1 ;
         }
     }
 }

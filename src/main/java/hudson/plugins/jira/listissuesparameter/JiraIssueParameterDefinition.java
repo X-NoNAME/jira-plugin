@@ -34,6 +34,8 @@ import java.util.List;
 
 import static hudson.Util.fixNull;
 import static java.util.Arrays.asList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class JiraIssueParameterDefinition extends ParameterDefinition {
     private static final long serialVersionUID = 3927562542249244416L;
@@ -109,5 +111,8 @@ public class JiraIssueParameterDefinition extends ParameterDefinition {
             this.key = issue.getKey();
             this.summary = issue.getSummary();
         }
+
+        
+        
     }
 }
